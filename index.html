@@ -39,6 +39,12 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+        html, body {
+            height: 100%;
+            height: 100dvh; /* Mobile app height fix */
+            overflow: hidden; /* Prevents global scrolling to fit in screen */
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
@@ -50,12 +56,18 @@
             background-size: 100% 100%, 100% 100%, 35px 35px, 35px 35px;
             background-attachment: fixed;
             color: var(--text-main);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
             font-size: var(--font-md);
-            padding-bottom: 90px;
             will-change: transform;
         }
+
+        main {
+            height: 100%;
+            overflow-y: auto; /* Internal scrolling for content only */
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hide scrollbars */
+        }
+        main::-webkit-scrollbar { display: none; }
 
         h1, h2, h3, h4, .logo-text, .start-btn, .action-card-btn, button, .drawer-title {
             font-family: 'Bebas Neue', sans-serif;
@@ -78,7 +90,7 @@
             flex-direction: column;
             justify-content: center;
             opacity: 1 !important;
-            min-height: 100vh;
+            min-height: 100%;
             padding-top: 10px;
         }
 
@@ -102,12 +114,20 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Modern SVG Animated Logo Styles */
-        .brand-logo-svg {
+        /* Custom Logo Classes replacing SVG */
+        .brand-logo-img {
             width: 44px;
             height: 44px;
+            object-fit: contain;
             filter: drop-shadow(0 0 8px var(--primary-glow));
             transform-origin: center;
+        }
+        .auth-logo-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px var(--primary-glow));
         }
 
         /* Bounce from Up and Round to Left Keyframes */
@@ -267,7 +287,13 @@
         .rank-name { flex: 1; font-weight: 700; color: white; word-break: break-word; }
         .rank-earnings { color: var(--accent-green); font-weight: 800; }
 
-        .page-section { display: none; padding: 90px 18px 45px 18px; min-height: 100vh; opacity: 0; transition: opacity 0.3s ease-out; }
+        .page-section { 
+            display: none; 
+            padding: 90px 18px 90px 18px; /* Adjusted spacing for top/bottom fixed bars */
+            min-height: 100%; 
+            opacity: 0; 
+            transition: opacity 0.3s ease-out; 
+        }
         .page-section.active { display: block; opacity: 1; }
         .sec-title { font-size: var(--font-xxl); color: var(--text-light); border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 25px; text-shadow: 0 0 15px var(--primary-glow); text-transform: uppercase; }
 
@@ -321,7 +347,7 @@
             width: 100%; max-width: 460px; margin: 0 auto; background: var(--bg-panel); backdrop-filter: blur(20px);
             padding: 26px 20px; border: 1px solid var(--border-glow); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: center;
         }
-        .profile-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 12px; object-fit: cover; box-shadow: 0 0 20px var(--primary-glow); }
+        .profile-img-custom { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 12px; object-fit: cover; box-shadow: 0 0 20px var(--primary-glow); }
         
         .custom-form-box {
             background: var(--bg-card); backdrop-filter: blur(14px); padding: 18px; border: 1px solid var(--border-solid);
@@ -383,11 +409,7 @@
     <aside class="sidebar-drawer" id="sidebarDrawer">
         <div class="drawer-header">
             <div class="brand-logo-container">
-                <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" stroke="#00f0ff" stroke-width="6" fill="rgba(0,240,255,0.15)" />
-                    <path d="M30 35 L50 25 L70 35 L70 65 L50 75 L30 65 Z" stroke="#7000ff" stroke-width="5" fill="rgba(112,0,255,0.25)" />
-                    <circle cx="50" cy="50" r="12" fill="#00f0ff" />
-                </svg>
+                <img src="logo1.png" class="brand-logo-img" alt="Logo">
                 <div class="logo-text hidden-esp-title">HIDDEN <span>ESP</span></div>
             </div>
             <button class="drawer-close" id="closeDrawerBtn">&times;</button>
@@ -415,11 +437,7 @@
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
             <a href="#matches" class="brand-logo-container nav-item-btn" data-target="matches">
-                <svg class="brand-logo-svg animated-logo-entry" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" stroke="#00f0ff" stroke-width="6" fill="rgba(0,240,255,0.15)" />
-                    <path d="M30 35 L50 25 L70 35 L70 65 L50 75 L30 65 Z" stroke="#7000ff" stroke-width="5" fill="rgba(112,0,255,0.25)" />
-                    <circle cx="50" cy="50" r="12" fill="#00f0ff" />
-                </svg>
+                <img src="logo1.png" class="brand-logo-img animated-logo-entry" alt="Logo">
                 <div class="logo-text hidden-esp-title">HIDDEN <span>ESP</span></div>
             </a>
         </div>
@@ -504,11 +522,7 @@
         <!-- User Authentication View -->
         <section id="user-auth" class="page-section active">
             <div class="auth-header" style="text-align: center; margin-bottom: 25px;">
-                <svg class="brand-logo-svg animated-logo-entry" style="width: 90px; height: 90px; margin-bottom: 15px;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" stroke="#00f0ff" stroke-width="6" fill="rgba(0,240,255,0.15)" />
-                    <path d="M30 35 L50 25 L70 35 L70 65 L50 75 L30 65 Z" stroke="#7000ff" stroke-width="5" fill="rgba(112,0,255,0.25)" />
-                    <circle cx="50" cy="50" r="12" fill="#00f0ff" />
-                </svg>
+                <img src="logo1.png" class="auth-logo-img animated-logo-entry" alt="Logo">
                 <h1 style="font-size: var(--font-hero); font-family: 'Bebas Neue', sans-serif;" class="hidden-esp-title">HIDDEN <span>ESP</span></h1>
                 <p style="color: #aaa; font-size: var(--font-sm); margin-top: 5px;">Enter the competitive eSports arena</p>
             </div>
@@ -595,11 +609,7 @@
             <h2 class="sec-title">MY PROFILE</h2>
             
             <div class="user-profile-card" style="margin: 0 0 22px 0; max-width: 100%;">
-                <svg class="brand-logo-svg profile-img" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" stroke="#00f0ff" stroke-width="6" fill="rgba(0,240,255,0.15)" />
-                    <path d="M30 35 L50 25 L70 35 L70 65 L50 75 L30 65 Z" stroke="#7000ff" stroke-width="5" fill="rgba(112,0,255,0.25)" />
-                    <circle cx="50" cy="50" r="12" fill="#00f0ff" />
-                </svg>
+                <img src="logo1.png" class="profile-img-custom" alt="Profile">
                 <h3 id="profileName" style="font-size: var(--font-xxl); color: var(--primary); font-family: 'Bebas Neue', sans-serif; margin-bottom: 8px;">-</h3>
                 <p style="font-size: var(--font-sm); color: #ccc;"><strong>Game UID:</strong> <span id="profileGameUid">-</span></p>
                 <p style="font-size: var(--font-sm); color: #ccc;"><strong>Email:</strong> <span id="profileEmailCard">-</span></p>
