@@ -1,4 +1,4 @@
-[cite: 1]<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,7 +58,7 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             font-size: var(--font-md);
-            padding-bottom: calc(95px + env(safe-area-inset-bottom, 0px));
+            padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px));
             will-change: transform;
         }
 
@@ -118,13 +118,12 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Image Logo Styles */
+        /* Static Clean Image Logo Styles (No Animations) */
         .brand-logo-img {
             width: 44px;
             height: 44px;
             object-fit: contain;
             filter: drop-shadow(0 0 8px var(--primary-glow));
-            transform-origin: center;
         }
 
         .splash-logo-img {
@@ -134,37 +133,69 @@
             filter: drop-shadow(0 0 15px var(--primary-glow));
         }
 
-        /* Animated Logo Entry Keyframes */
-        .animated-logo-entry {
-            animation: logoBounceRoundLeft 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes logoBounceRoundLeft {
+        /* Motion Designer Quality: Elastic Text Bounce Keyframes */
+        @keyframes motionTextBounce {
             0% {
-                transform: translateY(-150px) rotate(-360deg) scale(0.2);
                 opacity: 0;
+                transform: translateY(-40px) scale(0.85);
             }
-            60% {
-                transform: translateY(12px) rotate(180deg) scale(1.15);
+            45% {
                 opacity: 1;
+                transform: translateY(12px) scale(1.08);
             }
-            80% {
-                transform: translateY(-4px) rotate(340deg) scale(0.95);
+            65% {
+                transform: translateY(-6px) scale(0.96);
+            }
+            82% {
+                transform: translateY(3px) scale(1.02);
             }
             100% {
-                transform: translateY(0) rotate(360deg) scale(1);
                 opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
 
-        /* HIDDEN ESP Animated Text Glow */
+        @keyframes motionTextSubtleBounce {
+            0% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-8px) scale(1.03);
+            }
+            50% {
+                transform: translateY(0);
+            }
+            70% {
+                transform: translateY(-3px) scale(1.01);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Text Bounce Classes */
+        .text-bounce {
+            display: inline-block;
+            animation: motionTextBounce 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        .page-section.active .sec-title {
+            animation: motionTextBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .bounce-on-hover:hover {
+            animation: motionTextSubtleBounce 0.5s ease;
+        }
+
+        /* HIDDEN ESP Glow & Motion Styling */
         .hidden-esp-title {
             background: linear-gradient(135deg, #ffffff 30%, var(--primary) 70%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
             display: inline-block;
-            animation: hiddenEspPulse 3s ease-in-out infinite alternate;
+            animation: hiddenEspPulse 3s ease-in-out infinite alternate, motionTextBounce 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         @keyframes hiddenEspPulse {
@@ -209,7 +240,7 @@
             position: fixed; top: 0; left: 0; width: 290px; height: 100dvh;
             background: rgba(8, 11, 20, 0.97); backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-right: 1px solid var(--border-glow); z-index: 3000;
+            border-right: 1px solid var(--border-glow); z-index: 9999;
             transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex; flex-direction: column; padding: 25px 20px;
             box-shadow: 10px 0 40px rgba(0,0,0,0.9);
@@ -218,7 +249,7 @@
 
         .drawer-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2999;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 9998;
             opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
         .drawer-overlay.active { opacity: 1; visibility: visible; }
@@ -241,29 +272,54 @@
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
         }
 
-        /* Fixed Bottom Navigation Bar - Glitch Free Layering */
+        /* Fixed Bottom Navigation Bar - Locked to Viewport Bottom */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; width: 100%;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            height: calc(65px + env(safe-area-inset-bottom, 0px));
             background: rgba(8, 10, 18, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-glow);
-            display: flex; justify-content: space-around; align-items: center;
-            height: calc(62px + env(safe-area-inset-bottom, 0px));
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
             padding-bottom: env(safe-area-inset-bottom, 0px);
-            z-index: 2000; box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.85);
+            z-index: 8000;
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.9);
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
         }
+
         .nav-item {
-            color: #7a8b9e; text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 3px; font-size: 0.68rem; 
-            font-family: 'Montserrat', sans-serif; transition: 0.25s ease; width: 25%; font-weight: 700;
-            padding: 4px 0;
+            color: #7a8b9e;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 0.7rem; 
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.2s ease, transform 0.2s ease;
+            width: 25%;
+            height: 100%;
+            font-weight: 700;
         }
-        .nav-item i { font-size: 1.25rem; transition: transform 0.2s; }
+
+        .nav-item i { font-size: 1.25rem; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .nav-item.active { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
-        .nav-item.active i { transform: translateY(-2px) scale(1.15); }
+        .nav-item.active i {
+            transform: translateY(-3px) scale(1.2);
+            color: var(--primary);
+            animation: motionTextSubtleBounce 0.4s ease;
+        }
+        .nav-item.active span {
+            animation: motionTextSubtleBounce 0.4s ease;
+        }
 
         /* Matches Sub Nav Filter Bar */
         .matches-sub-nav {
@@ -279,6 +335,7 @@
         .sub-nav-btn.active {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white; border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow);
+            animation: motionTextSubtleBounce 0.35s ease;
         }
 
         /* Leaderboard Showcase */
@@ -303,7 +360,7 @@
 
         .page-section { 
             display: none; 
-            padding: 80px 16px calc(100px + env(safe-area-inset-bottom, 0px)) 16px; 
+            padding: 85px 16px calc(100px + env(safe-area-inset-bottom, 0px)) 16px; 
             min-height: 100dvh; 
             opacity: 0; 
             transition: opacity 0.3s ease-out; 
@@ -311,7 +368,16 @@
             z-index: 1;
         }
         .page-section.active { display: block; opacity: 1; }
-        .sec-title { font-size: var(--font-xxl); color: var(--text-light); border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 25px; text-shadow: 0 0 15px var(--primary-glow); text-transform: uppercase; }
+        .sec-title { 
+            font-size: var(--font-xxl); 
+            color: var(--text-light); 
+            border-left: 4px solid var(--primary); 
+            padding-left: 15px; 
+            margin-bottom: 25px; 
+            text-shadow: 0 0 15px var(--primary-glow); 
+            text-transform: uppercase; 
+            display: inline-block;
+        }
 
         .start-btn {
             display: inline-block; padding: 12px 22px; font-size: clamp(1rem, 4vw, 1.4rem);
@@ -393,7 +459,7 @@
         /* Modals Scaled for Mobile Viewports */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
-            background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 4000;
+            background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 9999;
             justify-content: center; align-items: center; opacity: 0; transition: opacity 0.25s ease; padding: 15px;
         }
         .modal-content {
@@ -422,11 +488,11 @@
     <!-- Centered Logo & Text Authenticating Splash Loader -->
     <div id="login-animation">
         <div class="splash-brand-box">
-            <img src="logo1.png" alt="HIDDEN ESP Logo" class="splash-logo-img animated-logo-entry">
-            <h1 style="font-size: var(--font-xxl); font-family: 'Bebas Neue', sans-serif;" class="hidden-esp-title">HIDDEN <span>ESP</span></h1>
+            <img src="logo1.png" alt="HIDDEN ESP Logo" class="splash-logo-img">
+            <h1 style="font-size: var(--font-xxl); font-family: 'Bebas Neue', sans-serif;" class="hidden-esp-title text-bounce">HIDDEN <span>ESP</span></h1>
         </div>
         <div class="spinner"></div>
-        <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xl); color: var(--primary); letter-spacing: 2px;">AUTHENTICATING ARENA ACCESS...</h2>
+        <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xl); color: var(--primary); letter-spacing: 2px;" class="text-bounce">AUTHENTICATING ARENA ACCESS...</h2>
     </div>
 
     <!-- Interactive Background Canvas -->
@@ -438,7 +504,7 @@
         <div class="drawer-header">
             <div class="brand-logo-container">
                 <img src="logo1.png" alt="HIDDEN ESP Logo" class="brand-logo-img">
-                <div class="logo-text hidden-esp-title">HIDDEN <span>ESP</span></div>
+                <div class="logo-text hidden-esp-title text-bounce">HIDDEN <span>ESP</span></div>
             </div>
             <button class="drawer-close" id="closeDrawerBtn">&times;</button>
         </div>
@@ -465,8 +531,8 @@
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
             <a href="#matches" class="brand-logo-container nav-item-btn" data-target="matches">
-                <img src="logo1.png" alt="HIDDEN ESP Logo" class="brand-logo-img animated-logo-entry">
-                <div class="logo-text hidden-esp-title">HIDDEN <span>ESP</span></div>
+                <img src="logo1.png" alt="HIDDEN ESP Logo" class="brand-logo-img">
+                <div class="logo-text hidden-esp-title text-bounce">HIDDEN <span>ESP</span></div>
             </a>
         </div>
         <div class="header-controls">
@@ -476,7 +542,7 @@
         </div>
     </header>
 
-    <!-- Fixed Bottom Navigation Bar -->
+    <!-- Fixed Bottom Navigation Bar - Pinned Cleanly to Viewport Bottom -->
     <nav class="bottom-nav">
         <a href="#matches" class="nav-item active nav-item-btn" data-target="matches">
             <i class="fa-solid fa-gamepad"></i><span>MATCHES</span>
@@ -496,7 +562,7 @@
     <div class="modal-overlay" id="regModal">
         <div class="modal-content">
             <span class="close-modal" id="closeRegModal">&times;</span>
-            <h3 id="regModalTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl); color:var(--primary);">JOIN EVENT</h3>
+            <h3 id="regModalTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl); color:var(--primary);" class="text-bounce">JOIN EVENT</h3>
             <p id="regModalDetails" style="margin-bottom: 15px; font-size: var(--font-sm); color: #ccc;"></p>
             <div class="custom-form-box" style="border:none; padding:0; box-shadow:none; margin:0; background:transparent;">
                 
@@ -526,7 +592,7 @@
     <div class="modal-overlay" id="idpModal">
         <div class="modal-content" style="text-align: center;">
             <span class="close-modal" id="closeIdpModal">&times;</span>
-            <h3 style="color: #00ff88; text-shadow: 0 0 15px rgba(0,255,136,0.5); font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl);">ROOM DETAILS</h3>
+            <h3 style="color: #00ff88; text-shadow: 0 0 15px rgba(0,255,136,0.5); font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl);" class="text-bounce">ROOM DETAILS</h3>
             <div style="background: rgba(0,0,0,0.85); padding: 16px; border: 1px solid var(--primary); border-radius: 8px; margin-bottom: 12px;">
                 <p style="font-size: var(--font-md); color: #fff;"><strong>Room ID:</strong> <br><span id="displayRoomId" style="color: var(--primary); font-size: var(--font-xl); font-weight: bold; display:inline-block; margin-top:5px;"></span></p>
             </div>
@@ -541,7 +607,7 @@
     <div class="modal-overlay" id="adminParticipantsModal">
         <div class="modal-content">
             <span class="close-modal" id="closeAdminParticipantsModal">&times;</span>
-            <h3 id="adminPartTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xl); color:var(--primary);">REGISTERED PLAYERS</h3>
+            <h3 id="adminPartTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xl); color:var(--primary);" class="text-bounce">REGISTERED PLAYERS</h3>
             <div id="adminPartList" style="max-height: 360px; overflow-y: auto; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 8px; border: 1px solid var(--border-solid);"></div>
         </div>
     </div>
@@ -550,12 +616,12 @@
         <!-- User Authentication View -->
         <section id="user-auth" class="page-section active">
             <div class="auth-header" style="text-align: center; margin-bottom: 20px;">
-                <img src="logo1.png" alt="HIDDEN ESP Logo" class="brand-logo-img animated-logo-entry" style="width: 80px; height: 80px; margin-bottom: 12px;">
-                <h1 style="font-size: var(--font-hero); font-family: 'Bebas Neue', sans-serif;" class="hidden-esp-title">HIDDEN <span>ESP</span></h1>
-                <p style="color: #aaa; font-size: var(--font-sm); margin-top: 5px;">Enter the competitive eSports arena</p>
+                <img src="logo1.png" alt="HIDDEN ESP Logo" class="brand-logo-img" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                <h1 style="font-size: var(--font-hero); font-family: 'Bebas Neue', sans-serif;" class="hidden-esp-title text-bounce">HIDDEN <span>ESP</span></h1>
+                <p style="color: #aaa; font-size: var(--font-sm); margin-top: 5px;" class="text-bounce">Enter the competitive eSports arena</p>
             </div>
             <div class="user-auth-box" id="authBox">
-                <h2 id="authTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl); margin-bottom: 15px; color: var(--primary);">LOGIN</h2>
+                <h2 id="authTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl); margin-bottom: 15px; color: var(--primary);" class="text-bounce">LOGIN</h2>
                 <div class="custom-form-box" style="border:none; padding:0; box-shadow:none; margin-bottom:0; text-align: center; background:transparent;">
                     <input type="email" id="authEmail" placeholder="Email Address">
                     
@@ -586,7 +652,7 @@
 
         <!-- Arena Matches View -->
         <section id="matches" class="page-section">
-            <h2 class="sec-title">ARENA MATCHES</h2>
+            <h2 class="sec-title text-bounce">ARENA MATCHES</h2>
             <div class="matches-sub-nav">
                 <div class="sub-nav-btn active" data-filter="ALL">ALL MATCHES</div>
                 <div class="sub-nav-btn" data-filter="SCRIMS">SCRIMS</div>
@@ -603,11 +669,11 @@
 
         <!-- Rank View -->
         <section id="rank" class="page-section">
-            <h2 class="sec-title">LEADERBOARD</h2>
+            <h2 class="sec-title text-bounce">LEADERBOARD</h2>
             <div class="rank-top1">
                 <i class="fa-solid fa-crown" style="color: #ffd700; font-size: 3.2rem; margin-bottom: 5px; filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));"></i>
                 <p style="color: #ccc; font-size: 11px; font-weight: 800; letter-spacing: 2px;">TOP 1 MVP PLAYER</p>
-                <h3 id="top1-name">LOADING...</h3>
+                <h3 id="top1-name" class="text-bounce">LOADING...</h3>
                 <p>Total Winnings: <strong style="color: var(--accent-green);" id="top1-earnings">0 PKR</strong></p>
             </div>
             <div class="rank-list-container">
@@ -617,9 +683,9 @@
 
         <!-- Teams View -->
         <section id="teams" class="page-section">
-            <h2 class="sec-title">Team Management</h2>
+            <h2 class="sec-title text-bounce">Team Management</h2>
             <div class="custom-form-box" style="margin-bottom: 30px;">
-                <h3>Create Squad</h3>
+                <h3 class="text-bounce">Create Squad</h3>
                 <p style="color:#aaa; margin-bottom:12px; font-size:var(--font-sm);">Register 4 players for team formats.</p>
                 <input type="text" id="teamNameInput" placeholder="Squad Name">
                 <input type="text" id="p1Input" placeholder="Player 1 IGN">
@@ -628,31 +694,31 @@
                 <input type="text" id="p4Input" placeholder="Player 4 IGN">
                 <button id="createTeamBtn">CREATE TEAM</button>
             </div>
-            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size:var(--font-xl); margin-bottom: 15px; color: var(--primary);">MY TEAMS</h3>
+            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size:var(--font-xl); margin-bottom: 15px; color: var(--primary);" class="text-bounce">MY TEAMS</h3>
             <div class="grid-container" id="my-teams-list"></div>
         </section>
 
         <!-- User Profile & Wallet View -->
         <section id="profile" class="page-section">
-            <h2 class="sec-title">MY PROFILE</h2>
+            <h2 class="sec-title text-bounce">MY PROFILE</h2>
             
             <div class="user-profile-card">
                 <img src="logo1.png" alt="Profile Logo" class="profile-img">
-                <h3 id="profileName" style="font-size: var(--font-xxl); color: var(--primary); font-family: 'Bebas Neue', sans-serif; margin-bottom: 8px;">-</h3>
+                <h3 id="profileName" style="font-size: var(--font-xxl); color: var(--primary); font-family: 'Bebas Neue', sans-serif; margin-bottom: 8px;" class="text-bounce">-</h3>
                 <p style="font-size: var(--font-sm); color: #ccc;"><strong>Game UID:</strong> <span id="profileGameUid">-</span></p>
                 <p style="font-size: var(--font-sm); color: #ccc;"><strong>Email:</strong> <span id="profileEmailCard">-</span></p>
             </div>
 
             <div class="custom-form-box">
-                <h3 style="font-family: 'Bebas Neue', sans-serif; color: var(--primary);"><i class="fa-solid fa-scroll"></i> MATCH RULES</h3>
+                <h3 style="font-family: 'Bebas Neue', sans-serif; color: var(--primary);" class="text-bounce"><i class="fa-solid fa-scroll"></i> MATCH RULES</h3>
                 <div id="displayMatchRules" style="white-space: pre-wrap; font-size: var(--font-sm); color: #ddd; line-height: 1.6; background: rgba(0,0,0,0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-solid);">
                     Loading rules...
                 </div>
             </div>
 
             <div class="custom-form-box" style="text-align:center;">
-                <h3 style="font-family: 'Bebas Neue', sans-serif; color:var(--primary);">MY WALLET</h3>
-                <h2 style="font-size:var(--font-xxl); color:white; margin: 10px 0;"><i class="fa-solid fa-coins" style="color: gold;"></i> <span id="mainWalletBalance">0</span></h2>
+                <h3 style="font-family: 'Bebas Neue', sans-serif; color:var(--primary);" class="text-bounce">MY WALLET</h3>
+                <h2 style="font-size:var(--font-xxl); color:white; margin: 10px 0;" class="text-bounce"><i class="fa-solid fa-coins" style="color: gold;"></i> <span id="mainWalletBalance">0</span></h2>
                 <p style="color:var(--accent-green); font-size:var(--font-sm); margin-bottom:15px; font-weight: bold;">1 COIN = 1 PKR</p>
                 
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
@@ -683,12 +749,12 @@
             </div>
 
             <div class="custom-form-box">
-                <h3 style="font-family: 'Bebas Neue', sans-serif;">TRANSACTION HISTORY</h3>
+                <h3 style="font-family: 'Bebas Neue', sans-serif;" class="text-bounce">TRANSACTION HISTORY</h3>
                 <div id="transactionList" style="max-height: 200px; overflow-y:auto; margin-top:10px; font-size:var(--font-sm);"></div>
             </div>
 
             <div class="custom-form-box" style="text-align: center;">
-                <h3 style="font-family: 'Bebas Neue', sans-serif;">CUSTOMER SUPPORT</h3>
+                <h3 style="font-family: 'Bebas Neue', sans-serif;" class="text-bounce">CUSTOMER SUPPORT</h3>
                 <p style="font-size: var(--font-sm); color: #ccc; margin-bottom: 12px;">Need assistance? Contact support 24/7 on WhatsApp.</p>
                 <a id="supportWaBtn" href="https://wa.me/923269277193" target="_blank" class="start-btn" style="background: #25D366; color:#fff; width: 100%; font-size:var(--font-md);"><i class="fa-brands fa-whatsapp"></i> CHAT ON WHATSAPP</a>
             </div>
@@ -699,11 +765,11 @@
 
         <!-- Admin View -->
         <section id="admin" class="page-section">
-            <h2 class="sec-title">Admin Control Panel</h2>
+            <h2 class="sec-title text-bounce">Admin Control Panel</h2>
             <div class="admin-dashboard" id="admin-dashboard-screen" style="display:block;">
                 
                 <div class="custom-form-box" style="border: 2px solid #ff2a5f; margin-bottom: 20px;">
-                    <h3 style="color: #ff2a5f;"><i class="fa-solid fa-key"></i> Change Admin Password</h3>
+                    <h3 style="color: #ff2a5f;" class="text-bounce"><i class="fa-solid fa-key"></i> Change Admin Password</h3>
                     <p style="color:#aaa; font-size:var(--font-sm); margin-bottom:10px;">Update admin credentials securely.</p>
                     <input type="password" id="adminCurrentPass" placeholder="Current Password">
                     <input type="password" id="adminNewPass" placeholder="New Password (min 6 chars)">
@@ -712,14 +778,14 @@
                 </div>
 
                 <div class="custom-form-box" style="border: 2px solid var(--primary); margin-bottom: 20px;">
-                    <h3 style="color: var(--primary);"><i class="fa-solid fa-pen-to-square"></i> Edit Match Rules</h3>
+                    <h3 style="color: var(--primary);" class="text-bounce"><i class="fa-solid fa-pen-to-square"></i> Edit Match Rules</h3>
                     <p style="color:#aaa; font-size:var(--font-sm); margin-bottom:10px;">Update system-wide rules display.</p>
                     <textarea id="adminRulesInput" rows="10" placeholder="Enter match rules here..."></textarea>
                     <button id="saveRulesBtn" style="background: var(--primary);">SAVE MATCH RULES</button>
                 </div>
 
                 <div class="custom-form-box" style="border: 2px solid var(--primary); margin-bottom: 20px;">
-                    <h3 style="color: var(--primary);"><i class="fa-solid fa-gear"></i> System Contact Settings</h3>
+                    <h3 style="color: var(--primary);" class="text-bounce"><i class="fa-solid fa-gear"></i> System Contact Settings</h3>
                     <p style="color:#aaa; font-size:var(--font-sm); margin-bottom:10px;">Update contact and payment info live across the platform.</p>
                     <label style="color:var(--primary); font-size:12px; font-weight:bold; display:block; margin-bottom:4px;">Deposit Info Displayed To Users:</label>
                     <input type="text" id="adminDepositInfoInput" placeholder="e.g. 03269277193 (BIBI FATIMA)">
@@ -734,7 +800,7 @@
                 </div>
 
                 <div class="custom-form-box" style="border: 2px solid var(--accent-green); margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-green);"><i class="fa-solid fa-paper-plane"></i> Send Coins to Player (Gmail System)</h3>
+                    <h3 style="color: var(--accent-green);" class="text-bounce"><i class="fa-solid fa-paper-plane"></i> Send Coins to Player (Gmail System)</h3>
                     <p style="color:#aaa; font-size:var(--font-sm); margin-bottom:10px;">Reward tournament winners directly by email.</p>
                     <input type="email" id="adminSendCoinEmail" placeholder="Player Gmail Address">
                     <input type="number" id="adminSendCoinAmount" placeholder="Coin Amount" min="1">
@@ -743,7 +809,7 @@
                 </div>
 
                 <div class="custom-form-box" style="margin-bottom: 20px;">
-                    <h4>Add Match Event</h4>
+                    <h4 class="text-bounce">Add Match Event</h4>
                     <input type="text" id="scrimTitle" placeholder="Match Title">
                     <textarea id="scrimDetails" placeholder="Match Details" rows="2"></textarea>
                     
@@ -783,17 +849,17 @@
                 </div>
 
                 <div class="custom-form-box" style="margin-bottom: 20px;">
-                    <h3 style="color: var(--primary);">Deposit Requests</h3>
+                    <h3 style="color: var(--primary);" class="text-bounce">Deposit Requests</h3>
                     <div id="admin-coin-requests-list"></div>
                 </div>
 
                 <div class="custom-form-box" style="margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-green);">Withdraw Requests</h3>
+                    <h3 style="color: var(--accent-green);" class="text-bounce">Withdraw Requests</h3>
                     <div id="admin-withdraw-requests-list"></div>
                 </div>
 
                 <div class="custom-form-box">
-                    <h3 style="color: var(--primary);">Manage Matches</h3>
+                    <h3 style="color: var(--primary);" class="text-bounce">Manage Matches</h3>
                     <div id="admin-manage-list"></div>
                 </div>
             </div>
@@ -899,21 +965,39 @@
                 document.getElementById(id)?.addEventListener('click', () => hideModal(id.replace('close','').charAt(0).toLowerCase() + id.replace('close','').slice(1)));
             });
 
-            // Navigation Switcher
+            // Navigation Switcher - Fixed Bottom Nav & Page Sync
             document.querySelectorAll('.nav-item-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     toggleDrawer(false);
                     const target = btn.getAttribute('data-target');
                     
-                    document.querySelectorAll('.nav-item, .drawer-item').forEach(nav => {
-                        if (nav.getAttribute('data-target') === target) nav.classList.add('active');
-                        else nav.classList.remove('active');
+                    document.querySelectorAll('.bottom-nav .nav-item, .drawer-item').forEach(nav => {
+                        if (nav.getAttribute('data-target') === target) {
+                            nav.classList.add('active');
+                        } else {
+                            nav.classList.remove('active');
+                        }
                     });
 
-                    document.querySelectorAll('.page-section').forEach(sec => { sec.style.display = 'none'; sec.classList.remove('active'); });
+                    document.querySelectorAll('.page-section').forEach(sec => { 
+                        sec.style.display = 'none'; 
+                        sec.classList.remove('active'); 
+                    });
+                    
                     const targetSec = document.getElementById(target);
-                    if(targetSec) { targetSec.style.display = 'block'; setTimeout(() => targetSec.classList.add('active'), 10); }
+                    if(targetSec) { 
+                        targetSec.style.display = 'block'; 
+                        setTimeout(() => {
+                            targetSec.classList.add('active');
+                            // Re-trigger text bounce animation on page entry
+                            targetSec.querySelectorAll('.sec-title, .text-bounce').forEach(el => {
+                                el.style.animation = 'none';
+                                el.offsetHeight; /* trigger reflow */
+                                el.style.animation = null;
+                            });
+                        }, 10); 
+                    }
                     window.scrollTo(0,0);
                 });
             });
@@ -1168,7 +1252,7 @@
                     let dis = (isFull && !hasJoined) ? 'disabled style="background:#333; color:#777;"' : '';
                     let actionBtnHtml = `<button class="action-card-btn ${hasJoined?'btn-get-idp':''}" data-id="${entry.id}" ${dis}>${btnText}</button>`;
 
-                    newCard.innerHTML = `<span class="badge ${bgClass}">${escapeHTML(entry.status)}</span><h3>${escapeHTML(entry.title)}</h3>${formatSlots}${timeHtml}${feeText}<p>${escapeHTML(entry.details)}</p>${actionBtnHtml}`;
+                    newCard.innerHTML = `<span class="badge ${bgClass}">${escapeHTML(entry.status)}</span><h3 class="text-bounce">${escapeHTML(entry.title)}</h3>${formatSlots}${timeHtml}${feeText}<p>${escapeHTML(entry.details)}</p>${actionBtnHtml}`;
 
                     const actionBtnElement = newCard.querySelector('button.action-card-btn');
                     if(actionBtnElement) {
@@ -1375,7 +1459,7 @@
                     } 
                 });
                 
-                tSub = onSnapshot(query(collection(db,'teams'),where('ownerUid','==',user.uid)), s=>{ userTeams=[]; const l=document.getElementById('my-teams-list'); l.innerHTML=''; s.forEach(d=>{const tm={id:d.id,...d.data()}; userTeams.push(tm); l.innerHTML+=`<div class="gaming-card"><h3 style="color:var(--primary); font-size:16px;">${escapeHTML(tm.teamName)}</h3><p style="font-size:12px;">P1: ${escapeHTML(tm.players[0])}<br>P2: ${escapeHTML(tm.players[1])}<br>P3: ${escapeHTML(tm.players[2])}<br>P4: ${escapeHTML(tm.players[3])}</p></div>`;});});
+                tSub = onSnapshot(query(collection(db,'teams'),where('ownerUid','==',user.uid)), s=>{ userTeams=[]; const l=document.getElementById('my-teams-list'); l.innerHTML=''; s.forEach(d=>{const tm={id:d.id,...d.data()}; userTeams.push(tm); l.innerHTML+=`<div class="gaming-card"><h3 style="color:var(--primary); font-size:16px;" class="text-bounce">${escapeHTML(tm.teamName)}</h3><p style="font-size:12px;">P1: ${escapeHTML(tm.players[0])}<br>P2: ${escapeHTML(tm.players[1])}<br>P3: ${escapeHTML(tm.players[2])}<br>P4: ${escapeHTML(tm.players[3])}</p></div>`;});});
                 rSub = onSnapshot(query(collection(db,'registrations'),where('uid','==',user.uid)), s=>{ userRegistrations=[]; s.forEach(d=>userRegistrations.push(d.data().eventId)); renderAllEntries(); });
                 trSub = onSnapshot(query(collection(db,'walletTransactions'),where('uid','==',user.uid)), s=>{ const l=document.getElementById('transactionList'); l.innerHTML=''; let arr=[]; s.forEach(d=>arr.push(d.data())); arr.sort((a,b)=>(b.createdAt?.toMillis()||0)-(a.createdAt?.toMillis()||0)); arr.forEach(t=>{ const c=t.type==='addition'?'var(--accent-green)':'#ff2a5f', sn=t.type==='addition'?'+':'-'; l.innerHTML+=`<div style="background:rgba(0,0,0,0.85); padding:8px; border-left:3px solid ${c}; margin-bottom:5px;"><strong style="color:${c}">${sn}${t.amount} C</strong> <span style="color:#aaa;font-size:11px;">${escapeHTML(t.reason)}</span></div>`;});});
             }
@@ -1392,7 +1476,10 @@
                         document.getElementById('login-animation').style.display='none'; 
                         document.getElementById('matches').style.display='block'; 
                         setTimeout(()=>document.getElementById('matches').classList.add('active'),10);
-                        document.querySelector('[data-target="matches"]').classList.add('active');
+                        document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => {
+                            if (nav.getAttribute('data-target') === 'matches') nav.classList.add('active');
+                            else nav.classList.remove('active');
+                        });
                     }, 800);
                 } else {
                     document.body.classList.remove('logged-in'); 
