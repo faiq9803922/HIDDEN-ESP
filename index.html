@@ -41,8 +41,8 @@
 
         html, body {
             height: 100%;
-            height: 100dvh; /* Mobile app height fix */
-            overflow: hidden; /* Prevents global scrolling to fit in screen */
+            height: 100dvh;
+            overflow: hidden;
         }
 
         body {
@@ -62,10 +62,10 @@
 
         main {
             height: 100%;
-            overflow-y: auto; /* Internal scrolling for content only */
+            overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Hide scrollbars */
+            scrollbar-width: none;
         }
         main::-webkit-scrollbar { display: none; }
 
@@ -74,7 +74,6 @@
             letter-spacing: 1.8px;
         }
 
-        /* Speed Optimizations */
         .page-section, .gaming-card, .sidebar-drawer, .modal-overlay {
             transform: translateZ(0);
             backface-visibility: hidden;
@@ -82,7 +81,6 @@
 
         body:not(.logged-in) header,
         body:not(.logged-in) .bottom-nav { display: none !important; }
-
         body:not(.logged-in) main .page-section:not(#user-auth) { display: none !important; }
 
         body:not(.logged-in) #user-auth {
@@ -96,7 +94,6 @@
 
         body.logged-in .auth-header { display: none; }
 
-        /* Splash & Authentication Loader */
         #login-animation {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-dark); z-index: 9999; display: none;
@@ -114,46 +111,17 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Custom Logo Classes replacing SVG */
-        .brand-logo-img {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px var(--primary-glow));
-            transform-origin: center;
-        }
-        .auth-logo-img {
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px var(--primary-glow));
-        }
+        .brand-logo-img { width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 0 8px var(--primary-glow)); transform-origin: center; }
+        .auth-logo-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 15px; filter: drop-shadow(0 0 15px var(--primary-glow)); }
 
-        /* Bounce from Up and Round to Left Keyframes */
-        .animated-logo-entry {
-            animation: logoBounceRoundLeft 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
+        .animated-logo-entry { animation: logoBounceRoundLeft 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes logoBounceRoundLeft {
-            0% {
-                transform: translateY(-150px) rotate(-360deg) scale(0.2);
-                opacity: 0;
-            }
-            60% {
-                transform: translateY(12px) rotate(180deg) scale(1.15);
-                opacity: 1;
-            }
-            80% {
-                transform: translateY(-4px) rotate(340deg) scale(0.95);
-            }
-            100% {
-                transform: translateY(0) rotate(360deg) scale(1);
-                opacity: 1;
-            }
+            0% { transform: translateY(-150px) rotate(-360deg) scale(0.2); opacity: 0; }
+            60% { transform: translateY(12px) rotate(180deg) scale(1.15); opacity: 1; }
+            80% { transform: translateY(-4px) rotate(340deg) scale(0.95); }
+            100% { transform: translateY(0) rotate(360deg) scale(1); opacity: 1; }
         }
 
-        /* HIDDEN ESP Animated Text Glow */
         .hidden-esp-title {
             background: linear-gradient(135deg, #ffffff 30%, var(--primary) 70%, var(--secondary) 100%);
             -webkit-background-clip: text;
@@ -170,7 +138,6 @@
 
         #live-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
 
-        /* Header Navigation */
         header {
             position: fixed; top: 0; width: 100%; height: 70px;
             background: rgba(6, 7, 12, 0.88); backdrop-filter: blur(20px);
@@ -180,14 +147,9 @@
         }
 
         .header-left { display: flex; align-items: center; gap: 14px; }
-        .hamburger-btn {
-            background: transparent; border: none; color: var(--primary); font-size: 1.5rem;
-            cursor: pointer; padding: 5px; transition: transform 0.2s ease; display: flex; align-items: center;
-        }
+        .hamburger-btn { background: transparent; border: none; color: var(--primary); font-size: 1.5rem; cursor: pointer; padding: 5px; transition: transform 0.2s ease; display: flex; align-items: center; }
         .hamburger-btn:active { transform: scale(0.9); }
-
         .brand-logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
-        
         .logo-text { font-size: clamp(1.3rem, 4.8vw, 1.9rem); color: var(--text-light); line-height: 1; }
         .logo-text span { color: var(--primary); }
 
@@ -198,7 +160,6 @@
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); font-size: var(--font-sm);
         }
 
-        /* Sliding Sidebar Drawer */
         .sidebar-drawer {
             position: fixed; top: 0; left: 0; width: 290px; height: 100vh;
             background: rgba(8, 11, 20, 0.97); backdrop-filter: blur(25px);
@@ -216,25 +177,14 @@
         }
         .drawer-overlay.active { opacity: 1; visibility: visible; }
 
-        .drawer-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 30px; border-bottom: 1px solid var(--border-solid); padding-bottom: 15px;
-        }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-solid); padding-bottom: 15px; }
         .drawer-close { background: none; border: none; color: #888; font-size: 1.8rem; cursor: pointer; }
         
         .drawer-menu { display: flex; flex-direction: column; gap: 8px; }
-        .drawer-item {
-            display: flex; align-items: center; gap: 14px; padding: 12px 16px; color: #bbb;
-            text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
-            transition: all 0.2s ease; border: 1px solid transparent;
-        }
+        .drawer-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; color: #bbb; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s ease; border: 1px solid transparent; }
         .drawer-item i { font-size: 1.2rem; color: var(--primary); width: 22px; text-align: center; }
-        .drawer-item:hover, .drawer-item.active {
-            background: rgba(0, 240, 255, 0.1); color: #fff; border-color: var(--border-glow);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-        }
+        .drawer-item:hover, .drawer-item.active { background: rgba(0, 240, 255, 0.1); color: #fff; border-color: var(--border-glow); box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
 
-        /* Bottom Navigation */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: rgba(8, 10, 18, 0.95); backdrop-filter: blur(20px);
@@ -242,41 +192,18 @@
             display: flex; justify-content: space-around; align-items: center;
             height: 68px; z-index: 1000; box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.8);
         }
-        .nav-item {
-            color: #7a8b9e; text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 4px; font-size: 0.7rem; 
-            font-family: 'Montserrat', sans-serif; transition: 0.25s ease; width: 25%; font-weight: 700;
-        }
+        .nav-item { color: #7a8b9e; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 0.7rem; font-family: 'Montserrat', sans-serif; transition: 0.25s ease; width: 25%; font-weight: 700; }
         .nav-item i { font-size: 1.35rem; transition: transform 0.2s; }
         .nav-item.active { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
         .nav-item.active i { transform: translateY(-2px) scale(1.15); }
 
-        /* Matches Sub Nav Filter Bar */
-        .matches-sub-nav {
-            display: flex; overflow-x: auto; gap: 10px; margin-bottom: 22px; padding-bottom: 8px; scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
+        .matches-sub-nav { display: flex; overflow-x: auto; gap: 10px; margin-bottom: 22px; padding-bottom: 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .matches-sub-nav::-webkit-scrollbar { display: none; }
-        .sub-nav-btn {
-            background: rgba(18, 24, 40, 0.6); border: 1px solid var(--border-solid); color: #aaa;
-            padding: 8px 18px; border-radius: 20px; white-space: nowrap; font-size: var(--font-sm);
-            cursor: pointer; transition: all 0.25s ease; font-weight: 700; flex-shrink: 0;
-        }
-        .sub-nav-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white; border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow);
-        }
+        .sub-nav-btn { background: rgba(18, 24, 40, 0.6); border: 1px solid var(--border-solid); color: #aaa; padding: 8px 18px; border-radius: 20px; white-space: nowrap; font-size: var(--font-sm); cursor: pointer; transition: all 0.25s ease; font-weight: 700; flex-shrink: 0; }
+        .sub-nav-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
 
-        /* Leaderboard Showcase */
-        .rank-top1 {
-            text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(8, 10, 18, 0.9));
-            border: 1px solid rgba(255, 215, 0, 0.5); padding: 25px 15px; border-radius: 14px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
-            display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; overflow: hidden;
-        }
-        .rank-top1::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%); pointer-events: none;
-        }
+        .rank-top1 { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(8, 10, 18, 0.9)); border: 1px solid rgba(255, 215, 0, 0.5); padding: 25px 15px; border-radius: 14px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; overflow: hidden; }
+        .rank-top1::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%); pointer-events: none; }
         .rank-top1 h3 { color: #ffd700; font-size: var(--font-xxl); text-shadow: 0 0 20px rgba(255, 215, 0, 0.7); line-height: 1; margin:0; }
         .rank-top1 p { color: #eee; font-size: var(--font-md); margin:0; }
         
@@ -287,96 +214,46 @@
         .rank-name { flex: 1; font-weight: 700; color: white; word-break: break-word; }
         .rank-earnings { color: var(--accent-green); font-weight: 800; }
 
-        .page-section { 
-            display: none; 
-            padding: 90px 18px 90px 18px; /* Adjusted spacing for top/bottom fixed bars */
-            min-height: 100%; 
-            opacity: 0; 
-            transition: opacity 0.3s ease-out; 
-        }
+        .page-section { display: none; padding: 90px 18px 90px 18px; min-height: 100%; opacity: 0; transition: opacity 0.3s ease-out; }
         .page-section.active { display: block; opacity: 1; }
         .sec-title { font-size: var(--font-xxl); color: var(--text-light); border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 25px; text-shadow: 0 0 15px var(--primary-glow); text-transform: uppercase; }
 
-        .start-btn {
-            display: inline-block; padding: 12px 22px; font-size: clamp(1rem, 4vw, 1.4rem);
-            background: linear-gradient(135deg, var(--primary), #0072ff); color: #fff; font-weight: 700;
-            border: none; cursor: pointer; text-decoration: none; clip-path: polygon(6% 0, 100% 0, 94% 100%, 0% 100%);
-            transition: all 0.25s ease; box-shadow: 0 6px 20px var(--primary-glow); text-align: center;
-        }
+        .start-btn { display: inline-block; padding: 12px 22px; font-size: clamp(1rem, 4vw, 1.4rem); background: linear-gradient(135deg, var(--primary), #0072ff); color: #fff; font-weight: 700; border: none; cursor: pointer; text-decoration: none; clip-path: polygon(6% 0, 100% 0, 94% 100%, 0% 100%); transition: all 0.25s ease; box-shadow: 0 6px 20px var(--primary-glow); text-align: center; }
         .start-btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 30px var(--primary-glow); }
         .start-btn:disabled { opacity: 0.5; cursor: not-allowed; background: #444; box-shadow: none; }
 
-        /* Grid Layout & Cyber Esports Cards */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 18px; }
         @media (min-width: 650px) { .grid-container { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); } }
         
-        .gaming-card {
-            background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-solid);
-            border-top: 3px solid var(--primary); padding: 18px; border-radius: 10px; transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; position: relative; overflow: hidden;
-        }
+        .gaming-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-solid); border-top: 3px solid var(--primary); padding: 18px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .gaming-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 12px 35px var(--primary-glow); }
         .gaming-card h3 { font-size: var(--font-xl); color: white; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(255,255,255,0.2); }
         .gaming-card p { font-size: var(--font-sm); line-height: 1.5; white-space: pre-wrap; margin-bottom: 15px; flex-grow: 1; color: #b0c0d0; }
         
-        .fee-badge {
-            font-family: 'Montserrat', sans-serif; font-size: var(--font-sm); color: var(--primary);
-            font-weight: 800; margin-bottom: 12px; background: rgba(0, 240, 255, 0.12);
-            padding: 5px 12px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-glow);
-        }
-        .badge {
-            color: white; padding: 4px 10px; font-size: 0.72rem; font-weight: 800; border-radius: 4px;
-            display: inline-block; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; align-self: flex-start; text-transform: uppercase;
-        }
+        .fee-badge { font-family: 'Montserrat', sans-serif; font-size: var(--font-sm); color: var(--primary); font-weight: 800; margin-bottom: 12px; background: rgba(0, 240, 255, 0.12); padding: 5px 12px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-glow); }
+        .badge { color: white; padding: 4px 10px; font-size: 0.72rem; font-weight: 800; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; align-self: flex-start; text-transform: uppercase; }
         
         .bg-upcoming { background: var(--status-upcoming); }
         .bg-ongoing { background: var(--status-ongoing); box-shadow: 0 0 10px var(--secondary-glow); }
         .bg-completed { background: var(--status-completed); color: #000; }
         .bg-ended { background: var(--status-ended); }
         
-        .action-card-btn {
-            background: linear-gradient(135deg, var(--primary), #0072ff); color: #fff; font-weight: 700;
-            border: none; padding: 12px; font-size: var(--font-lg); cursor: pointer; margin-top: auto;
-            border-radius: 6px; transition: 0.25s ease; text-transform: uppercase; width: 100%; box-shadow: 0 4px 18px var(--primary-glow);
-        }
+        .action-card-btn { background: linear-gradient(135deg, var(--primary), #0072ff); color: #fff; font-weight: 700; border: none; padding: 12px; font-size: var(--font-lg); cursor: pointer; margin-top: auto; border-radius: 6px; transition: 0.25s ease; text-transform: uppercase; width: 100%; box-shadow: 0 4px 18px var(--primary-glow); }
         .action-card-btn:hover:not(:disabled) { filter: brightness(1.15); }
         .action-card-btn:disabled { background: #333; color: #777; cursor: not-allowed; box-shadow: none; }
         .btn-get-idp { background: linear-gradient(135deg, #00ff88, #25D366) !important; color: #000 !important; font-weight: 800 !important; }
 
-        .user-auth-box, .user-profile-card {
-            width: 100%; max-width: 460px; margin: 0 auto; background: var(--bg-panel); backdrop-filter: blur(20px);
-            padding: 26px 20px; border: 1px solid var(--border-glow); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: center;
-        }
+        .user-auth-box, .user-profile-card { width: 100%; max-width: 460px; margin: 0 auto; background: var(--bg-panel); backdrop-filter: blur(20px); padding: 26px 20px; border: 1px solid var(--border-glow); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: center; }
         .profile-img-custom { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 12px; object-fit: cover; box-shadow: 0 0 20px var(--primary-glow); }
         
-        .custom-form-box {
-            background: var(--bg-card); backdrop-filter: blur(14px); padding: 18px; border: 1px solid var(--border-solid);
-            border-radius: 10px; margin-bottom: 22px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); text-align: left;
-        }
+        .custom-form-box { background: var(--bg-card); backdrop-filter: blur(14px); padding: 18px; border: 1px solid var(--border-solid); border-radius: 10px; margin-bottom: 22px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); text-align: left; }
         .custom-form-box h3, .custom-form-box h4 { font-size: var(--font-xl); margin-bottom: 15px; color: white; }
-        .custom-form-box input, .custom-form-box textarea, .custom-form-box select {
-            width: 100%; padding: 12px 14px; margin-bottom: 14px; background: rgba(5, 8, 15, 0.9); border: 1px solid var(--border-solid);
-            color: white; font-size: 14px; font-family: 'Montserrat', sans-serif; border-radius: 6px; transition: 0.2s;
-        }
-        .custom-form-box input:focus, .custom-form-box textarea:focus, .custom-form-box select:focus {
-            border-color: var(--primary); outline: none; box-shadow: 0 0 12px var(--primary-glow);
-        }
-        .custom-form-box button {
-            width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), #0072ff);
-            color: #fff; border: none; cursor: pointer; font-weight: 700; font-size: var(--font-lg); border-radius: 6px; transition: 0.25s;
-        }
+        .custom-form-box input, .custom-form-box textarea, .custom-form-box select { width: 100%; padding: 12px 14px; margin-bottom: 14px; background: rgba(5, 8, 15, 0.9); border: 1px solid var(--border-solid); color: white; font-size: 14px; font-family: 'Montserrat', sans-serif; border-radius: 6px; transition: 0.2s; }
+        .custom-form-box input:focus, .custom-form-box textarea:focus, .custom-form-box select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 12px var(--primary-glow); }
+        .custom-form-box button { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), #0072ff); color: #fff; border: none; cursor: pointer; font-weight: 700; font-size: var(--font-lg); border-radius: 6px; transition: 0.25s; }
         
-        /* Modals Scaled for Mobile */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 4000;
-            justify-content: center; align-items: center; opacity: 0; transition: opacity 0.25s ease; padding: 15px;
-        }
-        .modal-content {
-            background: var(--bg-panel); padding: 24px; border: 1.5px solid var(--primary); border-radius: 12px;
-            width: 100%; max-width: 460px; position: relative; max-height: 85vh; overflow-y: auto; transform: scale(0.92);
-            transition: transform 0.25s ease; box-shadow: 0 0 40px var(--primary-glow);
-        }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 4000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.25s ease; padding: 15px; }
+        .modal-content { background: var(--bg-panel); padding: 24px; border: 1.5px solid var(--primary); border-radius: 12px; width: 100%; max-width: 460px; position: relative; max-height: 85vh; overflow-y: auto; transform: scale(0.92); transition: transform 0.25s ease; box-shadow: 0 0 40px var(--primary-glow); }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-overlay.active .modal-content { transform: scale(1); }
         .close-modal { position: absolute; top: 12px; right: 16px; font-size: 2rem; color: #aaa; cursor: pointer; line-height: 1; }
@@ -395,16 +272,13 @@
 </head>
 
 <body>
-    <!-- Authenticating Splash Loader -->
     <div id="login-animation">
         <div class="spinner"></div>
         <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: var(--font-xxl); color: var(--primary);" class="hidden-esp-title">AUTHENTICATING HIDDEN ESP...</h2>
     </div>
 
-    <!-- Interactive Background Canvas -->
     <canvas id="live-bg"></canvas>
 
-    <!-- Slide Drawer Menu Overlay & Drawer -->
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="sidebar-drawer" id="sidebarDrawer">
         <div class="drawer-header">
@@ -430,7 +304,6 @@
         </div>
     </aside>
 
-    <!-- Header Navigation -->
     <header>
         <div class="header-left">
             <button class="hamburger-btn" id="openDrawerBtn" aria-label="Open Menu">
@@ -448,7 +321,6 @@
         </div>
     </header>
 
-    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="#matches" class="nav-item active nav-item-btn" data-target="matches">
             <i class="fa-solid fa-gamepad"></i><span>MATCHES</span>
@@ -464,7 +336,6 @@
         </a>
     </nav>
 
-    <!-- Registration & Slot Selection Modal -->
     <div class="modal-overlay" id="regModal">
         <div class="modal-content">
             <span class="close-modal" id="closeRegModal">&times;</span>
@@ -482,7 +353,6 @@
                     <select id="regTeamSelect"></select>
                 </div>
 
-                <!-- Interactive Slot Matrix -->
                 <div id="slotSelectionContainer" style="display:none; margin-bottom:15px;">
                     <label style="display:block; margin-bottom:5px; font-size:var(--font-sm); color:var(--primary); font-weight:bold;">Select Slot Number:</label>
                     <div id="slotGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 12px; border: 1px solid var(--border-solid); border-radius: 8px;"></div>
@@ -494,7 +364,6 @@
         </div>
     </div>
 
-    <!-- IDP Room Details Modal -->
     <div class="modal-overlay" id="idpModal">
         <div class="modal-content" style="text-align: center;">
             <span class="close-modal" id="closeIdpModal">&times;</span>
@@ -509,7 +378,6 @@
         </div>
     </div>
 
-    <!-- Admin Participants Modal -->
     <div class="modal-overlay" id="adminParticipantsModal">
         <div class="modal-content">
             <span class="close-modal" id="closeAdminParticipantsModal">&times;</span>
@@ -519,7 +387,6 @@
     </div>
 
     <main>
-        <!-- User Authentication View -->
         <section id="user-auth" class="page-section active">
             <div class="auth-header" style="text-align: center; margin-bottom: 25px;">
                 <img src="logo1.png" class="auth-logo-img animated-logo-entry" alt="Logo">
@@ -556,7 +423,6 @@
             </div>
         </section>
 
-        <!-- Arena Matches View -->
         <section id="matches" class="page-section">
             <h2 class="sec-title">ARENA MATCHES</h2>
             <div class="matches-sub-nav">
@@ -568,12 +434,9 @@
                 <div class="sub-nav-btn" data-filter="LONEWOLF">LONEWOLF</div>
                 <div class="sub-nav-btn" data-filter="CRAFTLAND">CRAFTLAND</div>
             </div>
-            <div class="grid-container" id="all-matches-list">
-                <!-- Matches Injected dynamically -->
-            </div>
+            <div class="grid-container" id="all-matches-list"></div>
         </section>
 
-        <!-- Rank View -->
         <section id="rank" class="page-section">
             <h2 class="sec-title">LEADERBOARD</h2>
             <div class="rank-top1">
@@ -587,7 +450,6 @@
             </div>
         </section>
 
-        <!-- Teams View -->
         <section id="teams" class="page-section">
             <h2 class="sec-title">Team Management</h2>
             <div class="custom-form-box" style="margin-bottom: 30px;">
@@ -604,7 +466,6 @@
             <div class="grid-container" id="my-teams-list"></div>
         </section>
 
-        <!-- User Profile & Wallet View -->
         <section id="profile" class="page-section">
             <h2 class="sec-title">MY PROFILE</h2>
             
@@ -669,7 +530,6 @@
             <button class="start-btn" id="userLogoutBtn" style="width: 100%; background: #ff2a5f; color: #fff;">LOG OUT</button>
         </section>
 
-        <!-- Admin View -->
         <section id="admin" class="page-section">
             <h2 class="sec-title">Admin Control Panel</h2>
             <div class="admin-dashboard" id="admin-dashboard-screen" style="display:block;">
@@ -744,7 +604,20 @@
                     </select>
                     
                     <input type="number" id="scrimFee" placeholder="Fee (0 for Free)">
-                    <input type="text" id="scrimIdpTime" placeholder="IDP Time">
+                    
+                    <label style="color:var(--primary); font-size: 12px; font-weight: bold;">IDP Time:</label>
+                    <div style="display: flex; gap: 5px; margin-bottom: 14px;">
+                        <select id="scrimIdpHours" style="flex:1; padding:12px; background:rgba(5, 8, 15, 0.9); border:1px solid var(--border-solid); color:white; border-radius:6px;">
+                            <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                        </select>
+                        <select id="scrimIdpMins" style="flex:1; padding:12px; background:rgba(5, 8, 15, 0.9); border:1px solid var(--border-solid); color:white; border-radius:6px;">
+                            <option value="00">00</option><option value="05">05</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option>
+                        </select>
+                        <select id="scrimIdpAmPm" style="flex:1; padding:12px; background:rgba(5, 8, 15, 0.9); border:1px solid var(--border-solid); color:white; border-radius:6px;">
+                            <option value="AM">AM</option><option value="PM">PM</option>
+                        </select>
+                    </div>
+
                     <select id="scrimStatus">
                         <option value="Upcoming">Upcoming</option>
                         <option value="On Going">On Going</option>
@@ -772,22 +645,16 @@
         </section>
     </main>
 
-    <!-- App Engine & Web Audio Sound Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, setDoc, getDoc, runTransaction, query, where, orderBy, serverTimestamp, getDocs, limit } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Web Audio API Synthesized UI Click Sound (Fast & Zero Latency)
         let audioCtx = null;
         function playClickSound() {
             try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
@@ -802,12 +669,24 @@
             } catch(e) {}
         }
 
-        // Attach global tactile click feedback listener
         document.addEventListener('click', (e) => {
             if (e.target.closest('button, .start-btn, .nav-item-btn, .sub-nav-btn, .action-card-btn, .close-modal, .hamburger-btn, .drawer-item, a')) {
                 playClickSound();
             }
         });
+
+        // Notifications API setup
+        function requestNotificationPermission() {
+            if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission();
+            }
+        }
+
+        function sendNotification(title, body) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(title, { body: body, icon: 'logo1.png' });
+            }
+        }
 
         const firebaseConfig = {
           apiKey: "AIzaSyBGCFVf7QvWhw0obDYhIsiafihSx0V6jnw",
@@ -826,38 +705,20 @@
         function escapeHTML(str) { return str ? String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#039;'}[m])) : ''; }
         function cleanPhone(num) { return num ? String(num).replace(/[^0-9]/g, '') : ''; }
 
-        const defaultRulesText = `M590 match rules : MATCHES RULES
-
-*1) AFTER WE SEND ID PASS YOU HAVE 8MIN TO JOIN*
-*2) ORION RYDEN DEMETRI SONIA NOT ALLOW*
-*3) PC PLAYER not ALLOW*
-*5) NO HACK NO PNL USE*
-*6) IF YOU BREAK ANY RULE YOU DISQUALIFIED*
-*7) NO TEAM UP*
-*8) MIC ON ALLOW BUT NO ONE GIVES LOCATION IF DO SO DISQUALIFIED*
-*9) SS MUST AFTER MATCH*
-*10) IF ANYONE ASK OTHER IS PANEL OR CHEAT OR TEAM UP THAN GIVE PROOF*
-*11) IF TWO OR MORE TEAMS HAVE SAME POINTS THEN CONSIDER SURVIVAL TIMe And kills+position ma pp divide same par*
-
-*LAST SLOT LEFT IDP GIVEN + LAST LEFT ANONE NEED COME INBOX 📥*`;
+        const defaultRulesText = `M590 match rules : MATCHES RULES\n\n*1) AFTER WE SEND ID PASS YOU HAVE 8MIN TO JOIN*\n*2) ORION RYDEN DEMETRI SONIA NOT ALLOW*\n*3) PC PLAYER not ALLOW*\n*5) NO HACK NO PNL USE*\n*6) IF YOU BREAK ANY RULE YOU DISQUALIFIED*\n*7) NO TEAM UP*\n*8) MIC ON ALLOW BUT NO ONE GIVES LOCATION IF DO SO DISQUALIFIED*\n*9) SS MUST AFTER MATCH*\n*10) IF ANYONE ASK OTHER IS PANEL OR CHEAT OR TEAM UP THAN GIVE PROOF*\n*11) IF TWO OR MORE TEAMS HAVE SAME POINTS THEN CONSIDER SURVIVAL TIMe And kills+position ma pp divide same par*\n\n*LAST SLOT LEFT IDP GIVEN + LAST LEFT ANONE NEED COME INBOX 📥*`;
 
         let siteEntries = [], userTeams = [], userRegistrations = [], currentCoins = 0, selectedEventForReg = null;
         let currentMatchFilter = 'ALL';
+        let previousEntries = {}; // Needed to detect slot changes
 
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Slide Drawer Logic
             const sidebarDrawer = document.getElementById('sidebarDrawer');
             const drawerOverlay = document.getElementById('drawerOverlay');
             
             function toggleDrawer(open) {
-                if (open) {
-                    sidebarDrawer.classList.add('active');
-                    drawerOverlay.classList.add('active');
-                } else {
-                    sidebarDrawer.classList.remove('active');
-                    drawerOverlay.classList.remove('active');
-                }
+                if (open) { sidebarDrawer.classList.add('active'); drawerOverlay.classList.add('active'); } 
+                else { sidebarDrawer.classList.remove('active'); drawerOverlay.classList.remove('active'); }
             }
 
             document.getElementById('openDrawerBtn')?.addEventListener('click', () => toggleDrawer(true));
@@ -871,18 +732,13 @@
                 document.getElementById(id)?.addEventListener('click', () => hideModal(id.replace('close','').charAt(0).toLowerCase() + id.replace('close','').slice(1)));
             });
 
-            // Navigation Switcher
             document.querySelectorAll('.nav-item-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    toggleDrawer(false);
+                    e.preventDefault(); toggleDrawer(false);
                     const target = btn.getAttribute('data-target');
-                    
                     document.querySelectorAll('.nav-item, .drawer-item').forEach(nav => {
-                        if (nav.getAttribute('data-target') === target) nav.classList.add('active');
-                        else nav.classList.remove('active');
+                        if (nav.getAttribute('data-target') === target) nav.classList.add('active'); else nav.classList.remove('active');
                     });
-
                     document.querySelectorAll('.page-section').forEach(sec => { sec.style.display = 'none'; sec.classList.remove('active'); });
                     const targetSec = document.getElementById(target);
                     if(targetSec) { targetSec.style.display = 'block'; setTimeout(() => targetSec.classList.add('active'), 10); }
@@ -908,7 +764,6 @@
             document.getElementById('showDepositBtn').addEventListener('click', () => { document.getElementById('depositSection').style.display='block'; document.getElementById('withdrawSection').style.display='none'; });
             document.getElementById('showWithdrawBtn').addEventListener('click', () => { document.getElementById('withdrawSection').style.display='block'; document.getElementById('depositSection').style.display='none'; });
 
-            // Dynamic Real-Time Settings Listener
             onSnapshot(doc(db, 'settings', 'config'), (snapshot) => {
                 const defaultDepositInfo = "03269277193 (BIBI FATIMA)";
                 const defaultDepositWa = "923269277193";
@@ -928,24 +783,20 @@
                     document.getElementById('adminDepositInfoInput').value = depInfo;
                     document.getElementById('adminDepositWaInput').value = depWa;
                     document.getElementById('adminSupportWaInput').value = supWa;
-
                     document.getElementById('displayMatchRules').innerText = matchRules;
                     document.getElementById('adminRulesInput').value = matchRules;
                 } else {
                     document.getElementById('depositNumberDisplay').innerText = defaultDepositInfo;
                     document.getElementById('depositWaBtn').href = `https://wa.me/${cleanPhone(defaultDepositWa)}`;
                     document.getElementById('supportWaBtn').href = `https://wa.me/${cleanPhone(defaultSupportWa)}`;
-
                     document.getElementById('adminDepositInfoInput').value = defaultDepositInfo;
                     document.getElementById('adminDepositWaInput').value = defaultDepositWa;
                     document.getElementById('adminSupportWaInput').value = defaultSupportWa;
-
                     document.getElementById('displayMatchRules').innerText = defaultRulesText;
                     document.getElementById('adminRulesInput').value = defaultRulesText;
                 }
             });
 
-            // Save Match Rules
             document.getElementById('saveRulesBtn').addEventListener('click', async (e) => {
                 const newRules = document.getElementById('adminRulesInput').value.trim();
                 if (!newRules) return alert("Match rules cannot be empty!");
@@ -956,13 +807,11 @@
                 } catch (err) { alert("Error: " + err.message); } finally { e.target.disabled = false; }
             });
 
-            // Save System Settings
             document.getElementById('saveSystemSettingsBtn').addEventListener('click', async (e) => {
                 const depInfo = document.getElementById('adminDepositInfoInput').value.trim();
                 const depWa = document.getElementById('adminDepositWaInput').value.trim();
                 const supWa = document.getElementById('adminSupportWaInput').value.trim();
                 if (!depInfo || !depWa || !supWa) return alert("Fill all contact fields!");
-
                 e.target.disabled = true;
                 try {
                     await setDoc(doc(db, 'settings', 'config'), { depositInfo: depInfo, depositWaNumber: cleanPhone(depWa), supportWaNumber: cleanPhone(supWa), updatedAt: serverTimestamp() }, { merge: true });
@@ -970,7 +819,6 @@
                 } catch (err) { alert("Error: " + err.message); } finally { e.target.disabled = false; }
             });
 
-            // Change Admin Password
             document.getElementById('changeAdminPassBtn').addEventListener('click', async (e) => {
                 const currentPass = document.getElementById('adminCurrentPass').value;
                 const newPass = document.getElementById('adminNewPass').value;
@@ -995,9 +843,44 @@
                 } catch (err) { alert("Error: " + err.message); } finally { e.target.disabled = false; }
             });
 
-            onSnapshot(collection(db, 'entries'), (snapshot) => { siteEntries = []; snapshot.forEach(doc => siteEntries.push({ id: doc.id, ...doc.data() })); renderAllEntries(); });
+            onSnapshot(collection(db, 'entries'), (snapshot) => {
+                siteEntries = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const entry = { id: doc.id, ...data };
+                    siteEntries.push(entry);
+
+                    // Slots logic & Notification Tracker
+                    let maxSlots = 12;
+                    if (entry.format === 'Solo') maxSlots = 48;
+                    else if (entry.format?.startsWith('CS') || entry.format?.startsWith('Lone Wolf')) maxSlots = 2;
+                    else if (entry.format?.startsWith('Craftland')) maxSlots = 6;
+                    
+                    const isFull = (entry.joinedCount || 0) >= maxSlots;
+                    const prev = previousEntries[entry.id];
+                    
+                    if (prev) {
+                        const wasFull = (prev.joinedCount || 0) >= maxSlots;
+                        // Just became full
+                        if (!wasFull && isFull) {
+                            sendNotification("IDP COMING BE READY!", `Slots full for ${entry.title}`);
+                            if (userRegistrations.includes(entry.id)) {
+                                alert("SLOTS FULL GO AND CHECK THE TIME FOR MATCH");
+                            }
+                        }
+                        // Admin edited IDP time after slot is full
+                        if (isFull && prev.idpTime !== entry.idpTime) {
+                            sendNotification("Match Time Updated", `SLOTS FULL GO AND CHECK THE TIME FOR MATCH`);
+                            if (userRegistrations.includes(entry.id)) {
+                                alert("SLOTS FULL GO AND CHECK THE TIME FOR MATCH");
+                            }
+                        }
+                    }
+                    previousEntries[entry.id] = entry;
+                });
+                renderAllEntries();
+            });
             
-            // Leaderboard Stream
             onSnapshot(query(collection(db, 'users'), orderBy('winningCoins', 'desc'), limit(20)), (snapshot) => {
                 const list = document.getElementById('rank-list-items'); list.innerHTML = '';
                 let index = 1;
@@ -1005,18 +888,12 @@
                     const data = docSnap.data();
                     const name = data.ign || (data.email ? data.email.split('@')[0] : 'Player');
                     const val = data.winningCoins || 0;
-                    
-                    if(index === 1) {
-                        document.getElementById('top1-name').innerText = name.toUpperCase();
-                        document.getElementById('top1-earnings').innerText = val + " PKR";
-                    } else {
-                        list.innerHTML += `<div class="rank-item"><div class="rank-pos">#${index}</div><div class="rank-name">${escapeHTML(name)}</div><div class="rank-earnings">${val} PKR</div></div>`;
-                    }
+                    if(index === 1) { document.getElementById('top1-name').innerText = name.toUpperCase(); document.getElementById('top1-earnings').innerText = val + " PKR"; } 
+                    else { list.innerHTML += `<div class="rank-item"><div class="rank-pos">#${index}</div><div class="rank-name">${escapeHTML(name)}</div><div class="rank-earnings">${val} PKR</div></div>`; }
                     index++;
                 });
             });
 
-            // Admin Requests Handlers
             onSnapshot(query(collection(db, 'coinRequests'), where('status', '==', 'pending')), (snapshot) => {
                 const list = document.getElementById('admin-coin-requests-list'); list.innerHTML = snapshot.empty ? '<p style="color:#aaa; font-size:12px;">No requests.</p>' : '';
                 snapshot.forEach((docSnap) => {
@@ -1027,94 +904,58 @@
                 document.querySelectorAll('.reject-coin-btn').forEach(btn => btn.addEventListener('click', async(e)=>{ e.target.disabled=true; await updateDoc(doc(db,'coinRequests',e.target.dataset.id),{status:'rejected'}); }));
             });
 
-            // Withdraw Processing
             onSnapshot(query(collection(db, 'withdrawRequests'), where('status', '==', 'pending')), (snapshot) => {
                 const list = document.getElementById('admin-withdraw-requests-list'); list.innerHTML = snapshot.empty ? '<p style="color:#aaa; font-size:12px;">No requests.</p>' : '';
                 snapshot.forEach((docSnap) => {
                     const req = {id: docSnap.id, ...docSnap.data()};
-                    list.innerHTML += `<div class="list-item-row"><div class="row-header-actions"><div><strong style="font-size:14px;">${escapeHTML(req.email)}</strong><br><strong style="color:var(--accent-green);">${escapeHTML(req.amount)} PKR</strong> (${escapeHTML(req.method)})<br><span style="color:#aaa; font-size:12px;">${escapeHTML(req.number)}</span></div><div class="row-actions"><button class="btn-success done-withdraw-btn" data-id="${req.id}" data-uid="${req.uid}" data-amount="${req.amount}" data-method="${req.method}">Done</button><button class="btn-danger reject-withdraw-btn" data-id="${req.id}">Reject</button>
-</div></div></div>`;
+                    list.innerHTML += `<div class="list-item-row"><div class="row-header-actions"><div><strong style="font-size:14px;">${escapeHTML(req.email)}</strong><br><strong style="color:var(--accent-green);">${escapeHTML(req.amount)} PKR</strong> (${escapeHTML(req.method)})<br><span style="color:#aaa; font-size:12px;">${escapeHTML(req.number)}</span></div><div class="row-actions"><button class="btn-success done-withdraw-btn" data-id="${req.id}" data-uid="${req.uid}" data-amount="${req.amount}" data-method="${req.method}">Done</button><button class="btn-danger reject-withdraw-btn" data-id="${req.id}">Reject</button></div></div></div>`;
                 });
 
                 document.querySelectorAll('.done-withdraw-btn').forEach(btn => btn.addEventListener('click', async(e)=>{ 
-                    const reqId = e.target.dataset.id;
-                    const userUid = e.target.dataset.uid;
-                    const reqAmount = parseInt(e.target.dataset.amount);
-                    const reqMethod = e.target.dataset.method;
+                    const reqId = e.target.dataset.id; const userUid = e.target.dataset.uid; const reqAmount = parseInt(e.target.dataset.amount); const reqMethod = e.target.dataset.method;
                     e.target.disabled = true;
-
                     try {
                         await runTransaction(db, async(t) => {
-                            const userRef = doc(db, 'users', userUid);
-                            const reqRef = doc(db, 'withdrawRequests', reqId);
-                            const transRef = doc(collection(db, 'walletTransactions'));
-
-                            const userSnap = await t.get(userRef);
-                            if (!userSnap.exists()) throw new Error("User does not exist");
-
-                            const userCoins = userSnap.data().coins || 0;
-                            if (userCoins < reqAmount) throw new Error(`Low balance: ${userCoins} C`);
-
+                            const userRef = doc(db, 'users', userUid); const reqRef = doc(db, 'withdrawRequests', reqId); const transRef = doc(collection(db, 'walletTransactions'));
+                            const userSnap = await t.get(userRef); if (!userSnap.exists()) throw new Error("User does not exist");
+                            const userCoins = userSnap.data().coins || 0; if (userCoins < reqAmount) throw new Error(`Low balance: ${userCoins} C`);
                             t.update(userRef, { coins: userCoins - reqAmount });
                             t.update(reqRef, { status: 'completed' });
-                            t.set(transRef, {
-                                uid: userUid,
-                                type: 'deduction',
-                                amount: reqAmount,
-                                reason: `Withdraw (${reqMethod}) Approved`,
-                                createdAt: serverTimestamp()
-                            });
-                        });
-                        alert("Withdrawal completed!");
+                            t.set(transRef, { uid: userUid, type: 'deduction', amount: reqAmount, reason: `Withdraw (${reqMethod}) Approved`, createdAt: serverTimestamp() });
+                        }); alert("Withdrawal completed!");
                     } catch(err) { alert("Error: " + err.message); } finally { e.target.disabled = false; }
                 }));
 
-                document.querySelectorAll('.reject-withdraw-btn').forEach(btn => btn.addEventListener('click', async(e)=>{ 
-                    e.target.disabled = true; 
-                    try { await updateDoc(doc(db, 'withdrawRequests', e.target.dataset.id), { status: 'rejected' }); } catch(err){}
-                }));
+                document.querySelectorAll('.reject-withdraw-btn').forEach(btn => btn.addEventListener('click', async(e)=>{ e.target.disabled = true; try { await updateDoc(doc(db, 'withdrawRequests', e.target.dataset.id), { status: 'rejected' }); } catch(err){} }));
             });
 
-            // Send Coins via Admin Panel
             document.getElementById('adminSendCoinsBtn').addEventListener('click', async (e) => {
                 const targetEmail = document.getElementById('adminSendCoinEmail').value.trim();
                 const amount = parseInt(document.getElementById('adminSendCoinAmount').value);
                 const reason = document.getElementById('adminSendCoinReason').value.trim() || 'Tournament Winner';
 
                 if(!targetEmail || isNaN(amount) || amount <= 0) return alert("Valid email & amount required!");
-
                 e.target.disabled = true;
                 try {
                     const usersQuery = query(collection(db, 'users'), where('email', '==', targetEmail));
                     const userSnap = await getDocs(usersQuery);
 
                     if(userSnap.empty) { alert("No user found."); e.target.disabled = false; return; }
-
                     const targetUid = userSnap.docs[0].id;
+
                     await runTransaction(db, async (t) => {
                         const userRef = doc(db, 'users', targetUid);
                         const userDat = await t.get(userRef);
                         const currentBal = userDat.data().coins || 0;
                         const currentWins = userDat.data().winningCoins || 0;
-
                         t.update(userRef, { coins: currentBal + amount, winningCoins: currentWins + amount });
-                        t.set(doc(collection(db, 'walletTransactions')), {
-                            uid: targetUid,
-                            type: 'addition',
-                            amount: amount,
-                            reason: reason,
-                            createdAt: serverTimestamp()
-                        });
+                        t.set(doc(collection(db, 'walletTransactions')), { uid: targetUid, type: 'addition', amount: amount, reason: reason, createdAt: serverTimestamp() });
                     });
-
                     alert(`Sent ${amount} coins to ${targetEmail}!`);
-                    document.getElementById('adminSendCoinEmail').value = '';
-                    document.getElementById('adminSendCoinAmount').value = '';
-                    document.getElementById('adminSendCoinReason').value = '';
+                    document.getElementById('adminSendCoinEmail').value = ''; document.getElementById('adminSendCoinAmount').value = ''; document.getElementById('adminSendCoinReason').value = '';
                 } catch(err) { alert("Failed: " + err.message); } finally { e.target.disabled = false; }
             });
 
-            // Render Matches & Admin Entries Optimized
             function renderAllEntries() {
                 const matchesList = document.getElementById('all-matches-list');
                 const adminList = document.getElementById('admin-manage-list');
@@ -1163,7 +1004,6 @@
                                 
                                 if(!isSoloFormat){ const sel = document.getElementById('regTeamSelect'); sel.innerHTML=''; userTeams.forEach(t=>sel.innerHTML+=`<option value="${t.id}">${escapeHTML(t.teamName)}</option>`); }
                                 
-                                // Interactive Slot Grid Builder
                                 let takenSlots = entry.takenSlots || [];
                                 const slotGrid = document.getElementById('slotGrid');
                                 slotGrid.innerHTML = '';
@@ -1171,37 +1011,18 @@
 
                                 for(let i=1; i<=maxSlots; i++) {
                                     let btn = document.createElement('div');
-                                    btn.innerText = i;
-                                    btn.style.padding = '8px 2px';
-                                    btn.style.textAlign = 'center';
-                                    btn.style.borderRadius = '6px';
-                                    btn.style.fontSize = '12px';
-                                    btn.style.fontWeight = 'bold';
-                                    btn.style.cursor = 'pointer';
-                                    btn.style.transition = '0.2s';
+                                    btn.innerText = i; btn.style.padding = '8px 2px'; btn.style.textAlign = 'center'; btn.style.borderRadius = '6px'; btn.style.fontSize = '12px'; btn.style.fontWeight = 'bold'; btn.style.cursor = 'pointer'; btn.style.transition = '0.2s';
                                     
                                     if(takenSlots.includes(i)) {
-                                        btn.style.background = '#ff2a5f';
-                                        btn.style.color = '#fff';
-                                        btn.style.cursor = 'not-allowed';
+                                        btn.style.background = '#ff2a5f'; btn.style.color = '#fff'; btn.style.cursor = 'not-allowed';
                                     } else {
-                                        btn.style.background = 'rgba(0, 240, 255, 0.15)';
-                                        btn.style.color = '#00f0ff';
-                                        btn.style.border = '1px solid var(--border-glow)';
-                                        btn.classList.add('slot-btn');
+                                        btn.style.background = 'rgba(0, 240, 255, 0.15)'; btn.style.color = '#00f0ff'; btn.style.border = '1px solid var(--border-glow)'; btn.classList.add('slot-btn');
                                         
                                         btn.addEventListener('click', function() {
                                             document.querySelectorAll('.slot-btn').forEach(b => {
-                                                if(!takenSlots.includes(parseInt(b.innerText))) {
-                                                    b.style.background = 'rgba(0, 240, 255, 0.15)';
-                                                    b.style.border = '1px solid var(--border-glow)';
-                                                    b.style.color = '#00f0ff';
-                                                }
+                                                if(!takenSlots.includes(parseInt(b.innerText))) { b.style.background = 'rgba(0, 240, 255, 0.15)'; b.style.border = '1px solid var(--border-glow)'; b.style.color = '#00f0ff'; }
                                             });
-                                            btn.style.background = 'var(--primary)';
-                                            btn.style.border = '1px solid var(--primary)';
-                                            btn.style.color = '#000';
-                                            document.getElementById('selectedSlotValue').value = i;
+                                            btn.style.background = 'var(--primary)'; btn.style.border = '1px solid var(--primary)'; btn.style.color = '#000'; document.getElementById('selectedSlotValue').value = i;
                                         });
                                     }
                                     slotGrid.appendChild(btn);
@@ -1213,7 +1034,6 @@
                     }
                     matchesList.appendChild(newCard);
 
-                    // Admin Dashboard Rows
                     const aRow = document.createElement('div'); aRow.classList.add('list-item-row');
                     aRow.innerHTML = `<div class="row-header-actions"><div><strong style="color:var(--primary);font-size:14px;">${escapeHTML(entry.title)}</strong></div><div class="row-actions"><select class="status-select" data-id="${entry.id}"><option value="Upcoming" ${entry.status==='Upcoming'?'selected':''}>Upcoming</option><option value="Completed" ${entry.status==='Completed'?'selected':''}>Completed</option><option value="On Going" ${entry.status==='On Going'?'selected':''}>On Going</option><option value="Ended" ${entry.status==='Ended'?'selected':''}>Ended</option></select><button class="btn-danger delete-db-btn" data-id="${entry.id}">Del</button></div></div><div style="display:flex; gap:5px; margin-top:5px;"><input type="text" class="room-id-input" placeholder="Room ID" value="${escapeHTML(entry.roomId||'')}"><input type="text" class="room-pass-input" placeholder="Pass" value="${escapeHTML(entry.roomPass||'')}"><button class="btn-success update-idp-btn" data-id="${entry.id}">Set IDP</button><button class="btn-primary view-participants-btn" data-id="${entry.id}">Players</button></div>`;
                     
@@ -1226,8 +1046,7 @@
                             let h='<table border="1"><tr><th style="color:var(--primary)">Slot</th><th style="color:var(--primary)">Name/IGN</th><th style="color:var(--primary)">Email</th></tr>';
                             let rows = [];
                             snap.forEach(d=>{ 
-                                const dt=d.data(); 
-                                const isSoloFmt = ['Solo', 'CS 1v1', 'Craftland M590 Solo', 'Lone Wolf 1v1'].includes(dt.format); 
+                                const dt=d.data(); const isSoloFmt = ['Solo', 'CS 1v1', 'Craftland M590 Solo', 'Lone Wolf 1v1'].includes(dt.format); 
                                 rows.push({slot: dt.slot || 'N/A', name: isSoloFmt ? dt.soloIgn : dt.teamName, email: dt.userName||dt.email||dt.uid});
                             });
                             rows.sort((a,b)=>a.slot - b.slot);
@@ -1236,17 +1055,20 @@
                         }catch(err){ list.innerHTML='Error loading data.'; }
                     });
                     
-                    aRow.querySelector('.update-idp-btn')?.addEventListener('click', async(e)=>{ e.target.disabled=true; await updateDoc(doc(db,'entries',e.target.dataset.id),{roomId:aRow.querySelector('.room-id-input').value, roomPass:aRow.querySelector('.room-pass-input').value}); e.target.disabled=false; alert("IDP Updated!"); });
+                    aRow.querySelector('.update-idp-btn')?.addEventListener('click', async(e)=>{ 
+                        e.target.disabled=true; 
+                        await updateDoc(doc(db,'entries',e.target.dataset.id),{roomId:aRow.querySelector('.room-id-input').value, roomPass:aRow.querySelector('.room-pass-input').value}); 
+                        e.target.disabled=false; 
+                        alert("IDP Updated!"); 
+                    });
 
                     adminList.appendChild(aRow);
                 });
             }
 
-            // Tournament Registration Transaction Execution
             document.getElementById('confirmRegBtn').addEventListener('click', async(e) => {
                 if(!selectedEventForReg) return; 
-                const fee=parseInt(selectedEventForReg.fee)||0; 
-                let tId=null, tNm="", sIgn=null;
+                const fee=parseInt(selectedEventForReg.fee)||0; let tId=null, tNm="", sIgn=null;
                 const isSoloReg = ['Solo', 'CS 1v1', 'Craftland M590 Solo', 'Lone Wolf 1v1'].includes(selectedEventForReg.format);
                 
                 let selectedSlot = parseInt(document.getElementById('selectedSlotValue').value);
@@ -1275,7 +1097,6 @@
                     if((uD.data().coins||0)<fee)throw "Insufficient balance!";
                     
                     tSlots.push(selectedSlot);
-                    
                     t.update(eR,{joinedCount:curJ+1, takenSlots: tSlots}); 
                     t.update(uR,{coins:(uD.data().coins||0)-fee});
                     t.set(doc(collection(db,'registrations')),{eventId:selectedEventForReg.id, uid:auth.currentUser.uid, userName:auth.currentUser.email, teamId:tId, teamName:tNm, soloIgn:sIgn, format:selectedEventForReg.format||'Team', slot: selectedSlot, feePaid:fee, createdAt:serverTimestamp()});
@@ -1283,7 +1104,6 @@
                 }); alert("Registered successfully!"); hideModal('regModal'); } catch(err){ alert("Registration failed: "+err); } finally { e.target.disabled=false; }
             });
 
-            // Auth Screen Switcher
             let isSignUp = false;
             document.getElementById('authToggleMsg').addEventListener('click', () => {
                 isSignUp = !isSignUp;
@@ -1303,22 +1123,12 @@
             
             document.getElementById('emailSignUpBtn').addEventListener('click', async(e)=>{ 
                 e.target.disabled=true; 
-                const em = document.getElementById('authEmail').value;
-                const pw = document.getElementById('authPassword').value;
-                const cpw = document.getElementById('authConfirmPassword').value;
-                const ign = document.getElementById('authIGN').value;
-                const gUid = document.getElementById('authGameUid').value;
-                const admnReq = document.getElementById('authAdminToggle').value;
-                const admnPass = document.getElementById('authAdminPass').value;
-                let isAdminAccess = false;
+                const em = document.getElementById('authEmail').value; const pw = document.getElementById('authPassword').value; const cpw = document.getElementById('authConfirmPassword').value; const ign = document.getElementById('authIGN').value; const gUid = document.getElementById('authGameUid').value; const admnReq = document.getElementById('authAdminToggle').value; const admnPass = document.getElementById('authAdminPass').value; let isAdminAccess = false;
 
                 if(pw !== cpw) { alert("Passwords do not match!"); e.target.disabled=false; return; }
                 if(!ign || !gUid) { alert("Please provide IGN & Game UID."); e.target.disabled=false; return; }
                 
-                if (admnReq === 'YES') {
-                    if (admnPass !== 'HIDDEN000') { alert("Invalid Admin Key!"); e.target.disabled = false; return; }
-                    isAdminAccess = true;
-                }
+                if (admnReq === 'YES') { if (admnPass !== 'HIDDEN000') { alert("Invalid Admin Key!"); e.target.disabled = false; return; } isAdminAccess = true; }
 
                 try{
                     const res = await createUserWithEmailAndPassword(auth, em, pw); 
@@ -1334,17 +1144,13 @@
                 
                 uSub = onSnapshot(uRef, d => { 
                     if(d.exists()){ 
-                        const data = d.data();
-                        currentCoins = data.coins || 0; 
+                        const data = d.data(); currentCoins = data.coins || 0; 
                         document.getElementById('headerCoinDisplay').style.display='flex'; 
                         document.getElementById('walletBalanceTop').innerText=currentCoins; 
                         document.getElementById('mainWalletBalance').innerText=currentCoins; 
-                        
                         document.getElementById('profileName').innerText = data.ign || user.displayName || 'Player';
                         document.getElementById('profileGameUid').innerText = data.gameUid || 'N/A';
-                        
-                        if(data.isAdmin) { document.getElementById('openAdminBtn').classList.remove('hidden'); } 
-                        else { document.getElementById('openAdminBtn').classList.add('hidden'); }
+                        if(data.isAdmin) { document.getElementById('openAdminBtn').classList.remove('hidden'); } else { document.getElementById('openAdminBtn').classList.add('hidden'); }
                     } 
                 });
                 
@@ -1355,6 +1161,7 @@
 
             window.updateUserUI = function(user) {
                 if(user) {
+                    requestNotificationPermission(); // Request perms on successful login
                     document.body.classList.add('logged-in'); 
                     document.getElementById('profileEmailCard').innerText=user.email; 
                     initUser(user);
@@ -1387,50 +1194,77 @@
 
             document.getElementById('requestCoinsBtn').addEventListener('click', async(e)=>{ const a=parseInt(document.getElementById('coinAmountReq').value); if(isNaN(a)||a<=0)return alert("Enter valid amount!"); e.target.disabled=true; await addDoc(collection(db,'coinRequests'),{uid:auth.currentUser.uid,email:auth.currentUser.email,requestedCoins:a,status:'pending',createdAt:serverTimestamp()}); alert("Coins requested! Send screenshot on WhatsApp."); document.getElementById('coinAmountReq').value=''; e.target.disabled=false; });
 
-            // Request Withdraw
-            document.getElementById('requestWithdrawBtn').addEventListener('click', async(e)=>{ 
-                const a = parseInt(document.getElementById('withdrawAmount').value);
-                const m = document.getElementById('withdrawMethod').value;
-                const n = document.getElementById('withdrawNumber').value.trim();
-
-                if (!m) return alert("Select withdraw method!");
-                if (isNaN(a) || a < 10) return alert("Min withdraw: 10 Coins.");
-                if (!n) return alert("Enter account number.");
-                if (currentCoins < a) return alert("Insufficient coins.");
-
-                e.target.disabled = true; 
+            // Finished Withdraw Execution
+            document.getElementById('requestWithdrawBtn').addEventListener('click', async(e) => {
+                const amount = parseInt(document.getElementById('withdrawAmount').value);
+                const method = document.getElementById('withdrawMethod').value;
+                const number = document.getElementById('withdrawNumber').value;
+                if(!amount || amount < 10 || !method || !number) return alert("Fill all fields correctly. Min 10 C.");
+                if(currentCoins < amount) return alert("Not enough coins!");
+                e.target.disabled = true;
                 try {
                     await addDoc(collection(db, 'withdrawRequests'), {
-                        uid: auth.currentUser.uid,
-                        email: auth.currentUser.email,
-                        amount: a,
-                        method: m,
-                        number: n,
-                        status: 'pending',
-                        createdAt: serverTimestamp()
-                    }); 
-                    alert("Withdrawal submitted!");
-                    document.getElementById('withdrawAmount').value = '';
-                    document.getElementById('withdrawNumber').value = '';
-                    document.getElementById('withdrawMethod').value = '';
-                } catch(err) { alert("Failed: " + err.message); } finally { e.target.disabled = false; }
+                        uid: auth.currentUser.uid, email: auth.currentUser.email, amount: amount, method: method, number: number, status: 'pending', createdAt: serverTimestamp()
+                    });
+                    alert("Withdraw request submitted!");
+                    document.getElementById('withdrawAmount').value = ''; document.getElementById('withdrawNumber').value = '';
+                } catch(err) { alert(err.message); } finally { e.target.disabled = false; }
             });
 
-            // Admin Match Publishing
-            document.getElementById('publishMatchBtn').addEventListener('click',async(e)=>{
-                const ty=e.target.dataset.type, t=document.getElementById(ty+'Title').value, d=document.getElementById(ty+'Details').value, s=document.getElementById(ty+'Status').value; 
-                const f=document.getElementById(ty+'Format').value, fe=parseInt(document.getElementById(ty+'Fee').value)||0, idp=document.getElementById(ty+'IdpTime').value, cat=document.getElementById(ty+'Category').value;
-                if(!t||!d)return alert("Title and details required."); 
-                e.target.disabled=true; 
-                await addDoc(collection(db,'entries'),{type:ty,title:t,details:d,status:s,format:f,fee:fe,idpTime:idp,category:cat,roomId:"",roomPass:"",joinedCount:0, takenSlots:[]}); 
-                alert("Event Published!"); e.target.disabled=false; document.getElementById(ty+'Title').value=''; document.getElementById(ty+'Details').value='';
+            // Publish Event Implementation (With Time Notification)
+            document.getElementById('publishMatchBtn')?.addEventListener('click', async(e) => {
+                const title = document.getElementById('scrimTitle').value;
+                const details = document.getElementById('scrimDetails').value;
+                const category = document.getElementById('scrimCategory').value;
+                const format = document.getElementById('scrimFormat').value;
+                const fee = parseInt(document.getElementById('scrimFee').value) || 0;
+                const status = document.getElementById('scrimStatus').value;
+                
+                const hours = document.getElementById('scrimIdpHours').value;
+                const mins = document.getElementById('scrimIdpMins').value;
+                const ampm = document.getElementById('scrimIdpAmPm').value;
+                const idpTime = `${hours}:${mins} ${ampm}`;
+
+                if(!title) return alert("Title required!");
+                e.target.disabled = true;
+                try {
+                    await addDoc(collection(db, 'entries'), { title, details, category, format, fee, status, idpTime, joinedCount: 0, takenSlots: [], createdAt: serverTimestamp() });
+                    sendNotification("Event Published", `New event added with IDP time: ${idpTime}`);
+                    alert("Event published successfully!");
+                } catch(err) { alert(err.message); } finally { e.target.disabled = false; }
             });
 
-            // Optimized Background Particle Simulation
-            const cvs = document.getElementById('live-bg'), cx = cvs.getContext('2d'); let w,h,pts=[];
-            function initC(){ w=cvs.width=window.innerWidth; h=cvs.height=window.innerHeight; pts=[]; for(let i=0;i<45;i++)pts.push({x:Math.random()*w,y:Math.random()*h,s:Math.random()*2+1,vx:Math.random()*0.8-0.4,vy:Math.random()*-1-0.2}); }
-            function animC(){ cx.clearRect(0,0,w,h); pts.forEach(p=>{cx.beginPath();cx.arc(p.x,p.y,p.s,0,Math.PI*2);cx.fillStyle='rgba(0,240,255,0.35)';cx.fill();p.x+=p.vx;p.y+=p.vy;if(p.y<0){p.y=h;p.x=Math.random()*w;}if(p.x<0||p.x>w)p.vx*=-1;}); requestAnimationFrame(animC); }
-            initC(); animC(); window.addEventListener('resize', initC);
+            // 10 Minute Before IDP Checker Service Worker
+            const notified10Min = new Set();
+            function parseTimeStringToDate(timeStr) {
+                if (!timeStr) return null;
+                const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+                if (!match) return null;
+                let hours = parseInt(match[1]); const mins = parseInt(match[2]); const ampm = match[3].toUpperCase();
+                if (ampm === 'PM' && hours < 12) hours += 12;
+                if (ampm === 'AM' && hours === 12) hours = 0;
+                const d = new Date(); d.setHours(hours, mins, 0, 0);
+                return d;
+            }
+
+            setInterval(() => {
+                if (!auth.currentUser) return;
+                const now = new Date();
+                siteEntries.forEach(entry => {
+                    if (userRegistrations.includes(entry.id) && entry.idpTime) {
+                        const idpDate = parseTimeStringToDate(entry.idpTime);
+                        if (idpDate) {
+                            const diffMs = idpDate - now;
+                            const diffMins = Math.floor(diffMs / 60000);
+                            if (diffMins > 0 && diffMins <= 10 && !notified10Min.has(entry.id)) {
+                                sendNotification("IDP COMING BE READY!", `10 minutes left for ${entry.title}! Be ready.`);
+                                notified10Min.add(entry.id);
+                            }
+                        }
+                    }
+                });
+            }, 30000);
+
         });
     </script>
 </body>
